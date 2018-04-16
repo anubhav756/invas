@@ -7,5 +7,6 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Anubhav Dhawan",
-  "license": "ISC"
+  "license": "ISC",
+  "homepage": "https://github.com/anubhav756/invas#readme"
 }
