@@ -8,5 +8,8 @@
   },
   "author": "Anubhav Dhawan",
   "license": "ISC",
-  "homepage": "https://github.com/anubhav756/invas#readme"
+  "homepage": "https://github.com/anubhav756/invas#readme",
+  "devDependencies": {
+    "concurrently": "^3.5.1"
+  }
 }
