@@ -2,9 +2,11 @@
   "name": "server",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
-    "start": "nodemon -r babel-register server.js"
+    "start": "nodemon -r babel-register server.js",
+    "build": "babel . --ignore node_modules,build --out-dir build",
+    "start:prod": "node build/server.js"
   },
   "author": "",
   "license": "ISC",
@@ -16,6 +18,7 @@
     "express": "^4.16.3"
   },
   "devDependencies": {
+    "babel-cli": "^6.26.0",
     "babel-register": "^6.26.0",
     "nodemon": "^1.17.3"
   }
