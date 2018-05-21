@@ -3,6 +3,9 @@ import express from 'express';
 import path from 'path';
 import cookieParser from 'cookie-parser';
 import logger from 'morgan';
+import mongoose from 'mongoose';
+
+mongoose.connect('mongodb://localhost:27017/invas');
 
 import apiRouter from './routes/api';
 
