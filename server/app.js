@@ -8,15 +8,14 @@ import { MONGODB_URI } from './config';
 import apiRouter from './app/routes';
 
 const app = express();
-const staticFiles = express.static(path.join(__dirname, '../../client/build'));
+const staticFiles = path.join(__dirname, '../../client/build');
 
 mongoose.connect(MONGODB_URI);
-
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use(staticFiles);
+app.use(express.static(staticFiles));
 
 app.use('/api/v1', apiRouter);
 
