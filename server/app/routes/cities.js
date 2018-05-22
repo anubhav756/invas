@@ -1,14 +1,8 @@
 import express from 'express';
-import City from '../models/City';
+import CityController from '../controllers/CityController';
 
 const router = express.Router();
 
-router.get('/', (req, res, next) => {
-  City.find({}, (err, docs) => {
-    if (err) throw err;
-
-    res.json(docs);
-  });
-});
+router.get('/', CityController.getAllCities);
 
 export default router;
