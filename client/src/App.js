@@ -2,10 +2,14 @@ import React, { Component } from 'react';
 import './App.css';
 
 class App extends Component {
-  state = {
-    cities: []
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      cities: [],
+    };
   }
-  async componentDidMount() {
+  async componentWillMount() {
     const response = await fetch('/api/v1/cities');
     const cities = await response.json();
 
@@ -17,9 +21,7 @@ class App extends Component {
     return (
       <div>
         <ul>
-          {cities.map(city => {
-            return <li key={city.name}> <b>{city.name}</b>: {city.population}</li>
-          })}
+          {cities.map(city => <li key={city.name}> <b>{city.name}</b>: {city.population}</li>)}
         </ul>
       </div>
     );

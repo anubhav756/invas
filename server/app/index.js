@@ -5,10 +5,10 @@ import cookieParser from 'cookie-parser';
 import logger from 'morgan';
 import mongoose from 'mongoose';
 import { MONGODB_URI } from './config';
-import apiRouter from './app/routes';
+import apiRouter from './routes';
 
 const app = express();
-const staticFiles = path.join(__dirname, '../../client/build');
+const staticFiles = path.join(__dirname, '../../../client/build');
 
 mongoose.connect(MONGODB_URI);
 app.use(logger('dev'));
@@ -25,7 +25,7 @@ app.use((req, res, next) => {
 });
 
 // error handler
-app.use((err, req, res, next) => {
+app.use((err, req, res) => {
   // set locals, only providing error in development
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};
