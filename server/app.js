@@ -5,8 +5,7 @@ import cookieParser from 'cookie-parser';
 import logger from 'morgan';
 import mongoose from 'mongoose';
 import { MONGODB_URI } from './config';
-
-import apiRouter from './routes/api';
+import apiRouter from './routes';
 
 const app = express();
 const staticFiles = express.static(path.join(__dirname, '../../client/build'));
