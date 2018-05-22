@@ -4,13 +4,14 @@ import path from 'path';
 import cookieParser from 'cookie-parser';
 import logger from 'morgan';
 import mongoose from 'mongoose';
-
-mongoose.connect(process.env.MONGODB_URI);
+import { MONGODB_URI } from './config';
 
 import apiRouter from './routes/api';
 
 const app = express();
 const staticFiles = express.static(path.join(__dirname, '../../client/build'));
+
+mongoose.connect(MONGODB_URI);
 
 app.use(logger('dev'));
 app.use(express.json());
