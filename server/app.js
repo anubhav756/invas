@@ -5,7 +5,7 @@ import cookieParser from 'cookie-parser';
 import logger from 'morgan';
 import mongoose from 'mongoose';
 
-mongoose.connect('mongodb://localhost:27017/invas');
+mongoose.connect(process.env.MONGODB_URI);
 
 import apiRouter from './routes/api';
 
