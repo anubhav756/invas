@@ -1,4 +1,7 @@
 import React, { Component } from 'react';
+import {
+  CssBaseline,
+} from '@material-ui/core';
 import './App.css';
 
 class App extends Component {
@@ -20,6 +23,7 @@ class App extends Component {
 
     return (
       <div>
+        <CssBaseline />
         <ul>
           {cities.map(city => <li key={city.name}> <b>{city.name}</b>: {city.population}</li>)}
         </ul>
