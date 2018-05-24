@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
-import { CssBaseline } from '@material-ui/core';
-import './App.css';
 
-class App extends Component {
+class Profile extends Component {
   constructor(props) {
     super(props);
 
@@ -20,14 +18,11 @@ class App extends Component {
     const { cities } = this.state;
 
     return (
-      <div>
-        <CssBaseline />
-        <ul>
-          {cities.map(city => <li key={city.name}> <b>{city.name}</b>: {city.population}</li>)}
-        </ul>
-      </div>
+      <ul>
+        {cities.map(city => <li key={city.name}> <b>{city.name}</b>: {city.population}</li>)}
+      </ul>
     );
   }
 }
 
-export default App;
+export default Profile;
