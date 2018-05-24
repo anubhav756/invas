@@ -1,6 +1,4 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import { withStyles } from '@material-ui/core/styles';
 import SwipeableViews from 'react-swipeable-views';
 import {
   AppBar,
@@ -13,12 +11,6 @@ import {
 } from '@material-ui/icons';
 import Profile from './scenes/Profile';
 import TabContainer from './components/TabContainer';
-
-const styles = theme => ({
-  root: {
-    backgroundColor: theme.palette.background.paper,
-  },
-});
 
 class Home extends Component {
   constructor(props) {
@@ -38,11 +30,10 @@ class Home extends Component {
     this.setState({ value });
   }
   render() {
-    const { classes, theme } = this.props;
     const { value } = this.state;
 
     return (
-      <div className={classes.root}>
+      <div>
         <AppBar position="static">
           <Tabs
             value={value}
@@ -55,21 +46,15 @@ class Home extends Component {
           </Tabs>
         </AppBar>
         <SwipeableViews
-          axis={theme.direction === 'rtl' ? 'x-reverse' : 'x'}
           index={value}
           onChangeIndex={this.handleChangeIndex}
         >
-          <TabContainer dir={theme.direction}><Profile /></TabContainer>
-          <TabContainer dir={theme.direction}>Coming soon...</TabContainer>
+          <TabContainer><Profile /></TabContainer>
+          <TabContainer>Coming soon...</TabContainer>
         </SwipeableViews>
       </div>
     );
   }
 }
 
-Home.propTypes = {
-  classes: PropTypes.shape().isRequired,
-  theme: PropTypes.shape().isRequired,
-};
-
-export default withStyles(styles, { withTheme: true })(Home);
+export default Home;
