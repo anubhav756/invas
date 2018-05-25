@@ -1,6 +1,6 @@
 import React from 'react';
 import { CssBaseline } from '@material-ui/core';
-import Home from '../scenes/Home';
+import Home from '../screens/Home';
 
 const App = () => (
   <div>
