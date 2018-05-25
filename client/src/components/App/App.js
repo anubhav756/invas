@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { CssBaseline } from '@material-ui/core';
 import { Provider } from 'react-redux';
-import { BrowserRouter as Router, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
 import Home from '../../scenes/Home';
 
@@ -11,7 +11,9 @@ const App = ({ store }) => (
     <CssBaseline />
     <Provider store={store}>
       <Router>
-        <Route path="/" component={Home} />
+        <Switch>
+          <Route path="/" component={Home} />
+        </Switch>
       </Router>
     </Provider>
   </div>
