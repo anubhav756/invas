@@ -1,21 +1,26 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { CircularProgress } from '@material-ui/core';
+import { getCities as _getCities } from '../../../../services/cities';
 
 class Profile extends Component {
-  constructor(props) {
-    super(props);
+  componentWillMount() {
+    const { getCities } = this.props;
 
-    this.state = {
-      cities: [],
-    };
-  }
-  async componentWillMount() {
-    const response = await fetch('/api/v1/cities');
-    const cities = await response.json();
-
-    this.setState({ cities });
+    getCities();
   }
   render() {
-    const { cities } = this.state;
+    const {
+      cities: {
+        isFetching,
+        cities,
+      },
+    } = this.props;
+
+    if (isFetching) {
+      return <CircularProgress />;
+    }
 
     return (
       <ul>
@@ -25,4 +30,18 @@ class Profile extends Component {
   }
 }
 
-export default Profile;
+Profile.propTypes = {
+  cities: PropTypes.shape({
+    isFetching: PropTypes.bool.isRequired,
+    cities: PropTypes.arrayOf(PropTypes.shape({
+      name: PropTypes.string.isRequired,
+      population: PropTypes.number.isRequired,
+    })).isRequired,
+  }).isRequired,
+  getCities: PropTypes.func.isRequired,
+};
+
+export default connect(
+  ({ cities }) => ({ cities }),
+  { getCities: _getCities },
+)(Profile);
