@@ -4,7 +4,7 @@ import { CssBaseline } from '@material-ui/core';
 import { Provider } from 'react-redux';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 
-import Home from '../../screens/Home';
+import Home from '../../scenes/Home';
 
 const App = ({ store }) => (
   <div>
