@@ -18,6 +18,7 @@ app.use(cookieParser());
 app.use(express.static(staticFiles));
 
 app.use('/api/v1', apiRouter);
+app.get('*', (req, res) => res.send('../../../client/build/index.html'));
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {
