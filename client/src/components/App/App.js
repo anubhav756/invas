@@ -1,15 +1,12 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { CssBaseline } from '@material-ui/core';
-import { createStore } from 'redux';
 import { Provider } from 'react-redux';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
-import rootReducer from '../../reducers';
 
 import Home from '../../screens/Home';
 
-const store = createStore(rootReducer);
-
-const App = () => (
+const App = ({ store }) => (
   <div>
     <CssBaseline />
     <Provider store={store}>
@@ -19,5 +16,9 @@ const App = () => (
     </Provider>
   </div>
 );
+
+App.propTypes = {
+  store: PropTypes.shape().isRequired,
+};
 
 export default App;
