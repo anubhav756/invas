@@ -1,7 +1,11 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { CircularProgress } from '@material-ui/core';
+import moment from 'moment';
+import {
+  Grid,
+  CircularProgress,
+} from '@material-ui/core';
 import { getCities as _getCities } from '../../../../services/cities';
 
 class Profile extends Component {
@@ -17,15 +21,23 @@ class Profile extends Component {
         cities,
       },
     } = this.props;
-
-    if (isFetching) {
-      return <CircularProgress />;
-    }
+    const currentDate = moment().format('dddd, MMMM Do YYYY');
+    const currentTime = moment().format('h:mm a');
 
     return (
-      <ul>
-        {cities.map(city => <li key={city.name}> <b>{city.name}</b>: {city.population}</li>)}
-      </ul>
+      <div>
+        <Grid container justify="space-around">
+          <Grid item>{currentDate}</Grid>
+          <Grid item>{currentTime}</Grid>
+        </Grid>
+        {
+          isFetching ?
+            <CircularProgress /> :
+            <ul>
+              {cities.map(city => <li key={city.name}> <b>{city.name}</b>: {city.population}</li>)}
+            </ul>
+        }
+      </div>
     );
   }
 }
