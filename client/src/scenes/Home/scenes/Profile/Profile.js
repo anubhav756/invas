@@ -6,19 +6,23 @@ import {
   Grid,
   CircularProgress,
 } from '@material-ui/core';
-import { getCities as _getCities } from '../../../../services/cities';
+import { getAgent as _getAgent } from '../../../../services/agent';
 
 class Profile extends Component {
   componentWillMount() {
-    const { getCities } = this.props;
+    const { getAgent } = this.props;
 
-    getCities();
+    getAgent();
   }
   render() {
     const {
-      cities: {
+      agent: {
         isFetching,
-        cities,
+        info: {
+          name,
+          designation,
+          region,
+        },
       },
     } = this.props;
     const currentDate = moment().format('dddd, MMMM Do YYYY');
@@ -33,9 +37,14 @@ class Profile extends Component {
         {
           isFetching ?
             <CircularProgress /> :
-            <ul>
-              {cities.map(city => <li key={city.name}> <b>{city.name}</b>: {city.population}</li>)}
-            </ul>
+            <Grid container style={{ marginTop: 20 }}>
+              <Grid item xs={6} sm={3}>Name:</Grid>
+              <Grid item xs={6} sm={9}>{name}</Grid>
+              <Grid item xs={6} sm={3}>Designation:</Grid>
+              <Grid item xs={6} sm={9}>{designation}</Grid>
+              <Grid item xs={6} sm={3}>Region:</Grid>
+              <Grid item xs={6} sm={9}>{region}</Grid>
+            </Grid>
         }
       </div>
     );
@@ -43,17 +52,18 @@ class Profile extends Component {
 }
 
 Profile.propTypes = {
-  cities: PropTypes.shape({
+  agent: PropTypes.shape({
     isFetching: PropTypes.bool.isRequired,
-    cities: PropTypes.arrayOf(PropTypes.shape({
-      name: PropTypes.string.isRequired,
-      population: PropTypes.number.isRequired,
-    })).isRequired,
+    info: PropTypes.shape({
+      name: PropTypes.string,
+      designation: PropTypes.string,
+      region: PropTypes.string,
+    }),
   }).isRequired,
-  getCities: PropTypes.func.isRequired,
+  getAgent: PropTypes.func.isRequired,
 };
 
 export default connect(
-  ({ cities }) => ({ cities }),
-  { getCities: _getCities },
+  ({ agent }) => ({ agent }),
+  { getAgent: _getAgent },
 )(Profile);

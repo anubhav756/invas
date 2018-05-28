@@ -1,8 +1,8 @@
 import express from 'express';
-import citiesRouter from './cities';
+import agentRouter from './agent';
 
 const router = express.Router();
 
-router.use('/cities', citiesRouter);
+router.use('/agent', agentRouter);
 
 export default router;

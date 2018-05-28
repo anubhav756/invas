@@ -1,7 +1,7 @@
 import { combineReducers } from 'redux';
 
-import cities from './services/cities';
+import agent from './services/agent';
 
 export default combineReducers({
-  cities,
+  agent,
 });
