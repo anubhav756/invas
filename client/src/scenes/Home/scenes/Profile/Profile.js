@@ -4,8 +4,16 @@ import { connect } from 'react-redux';
 import moment from 'moment';
 import {
   Grid,
+  Typography,
   CircularProgress,
+  Card,
+  CardHeader,
+  Avatar,
+  IconButton,
 } from '@material-ui/core';
+import { red } from '@material-ui/core/colors';
+import { Cloud } from '@material-ui/icons';
+
 import { getAgent as _getAgent } from '../../../../services/agent';
 
 class Profile extends Component {
@@ -30,21 +38,29 @@ class Profile extends Component {
 
     return (
       <div>
-        <Grid container justify="space-around">
-          <Grid item>{currentDate}</Grid>
-          <Grid item>{currentTime}</Grid>
+        <Grid container justify="space-around" style={{ marginBottom: 8 }}>
+          <Grid item>
+            <Typography variant="caption">{currentDate}</Typography>
+          </Grid>
+          <Grid item>
+            <Typography variant="caption">{currentTime}</Typography>
+          </Grid>
         </Grid>
         {
           isFetching ?
             <CircularProgress /> :
-            <Grid container style={{ marginTop: 20 }}>
-              <Grid item xs={6} sm={3}>Name:</Grid>
-              <Grid item xs={6} sm={9}>{name}</Grid>
-              <Grid item xs={6} sm={3}>Designation:</Grid>
-              <Grid item xs={6} sm={9}>{designation}</Grid>
-              <Grid item xs={6} sm={3}>Region:</Grid>
-              <Grid item xs={6} sm={9}>{region}</Grid>
-            </Grid>
+            <Card>
+              <CardHeader
+                avatar={<Avatar style={{ background: red[500] }}>A</Avatar>}
+                title={name}
+                subheader={`${designation} - ${region}`}
+                action={
+                  <IconButton>
+                    <Cloud />
+                  </IconButton>
+                }
+              />
+            </Card>
         }
       </div>
     );
