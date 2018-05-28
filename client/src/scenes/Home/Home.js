@@ -13,6 +13,7 @@ import {
   LocationOn,
 } from '@material-ui/icons';
 import Profile from './scenes/Profile';
+import Location from './scenes/Location';
 import TabContainer from './components/TabContainer';
 
 const routeToTabMap = [
@@ -83,7 +84,7 @@ class Home extends Component {
           onChangeIndex={this.handleChange}
         >
           <TabContainer><Profile /></TabContainer>
-          <TabContainer>Coming soon...</TabContainer>
+          <TabContainer><Location /></TabContainer>
         </SwipeableViews>
       </div>
     );
