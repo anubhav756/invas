@@ -1,11 +1,11 @@
 const GET_AGENT_START = 'GET_AGENT_START';
 const GET_AGENT_END = 'GET_AGENT_END';
 
-export function getAgent() {
+export function getAgent(id) {
   return async (dispatch) => {
     dispatch({ type: GET_AGENT_START });
 
-    const response = await fetch('/api/v1/agent');
+    const response = await fetch(`/api/v1/agents/${id}`);
     const agent = await response.json();
 
     dispatch({ type: GET_AGENT_END, payload: agent });

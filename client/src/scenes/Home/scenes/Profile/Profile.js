@@ -20,7 +20,7 @@ class Profile extends Component {
   componentWillMount() {
     const { getAgent } = this.props;
 
-    getAgent();
+    getAgent('testId');
   }
   render() {
     const {

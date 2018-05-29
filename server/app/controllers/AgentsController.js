@@ -1,6 +1,6 @@
 import Agent from '../models/Agent';
 
-export default class AgentController {
+class AgentsController {
   static getAgent(req, res) {
     Agent.findOne({}, (err, agent) => {
       if (err) throw err;
@@ -9,3 +9,5 @@ export default class AgentController {
     });
   }
 }
+
+export default AgentsController;

@@ -1,10 +1,10 @@
 import express from 'express';
 import createError from 'http-errors';
-import agentRouter from './agent';
+import agentsRouter from './agents';
 
 const router = express.Router();
 
-router.use('/agent', agentRouter);
+router.use('/agents', agentsRouter);
 
 // catch 404 and forward to error handler
 router.use((req, res, next) => {
