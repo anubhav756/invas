@@ -99,8 +99,8 @@ class Profile extends Component {
         {
           isFetching ?
             <CircularProgress /> :
-            <Grid container>
-              <Grid item xs={6}>
+            <Grid container spacing={32}>
+              <Grid item xs={12} md={6}>
                 <Grid container direction="column">
                   <Grid item>
                     <Typography variant="title">{name}</Typography>
@@ -113,7 +113,7 @@ class Profile extends Component {
                   </Grid>
                 </Grid>
               </Grid>
-              <Grid item xs={6}>
+              <Grid item xs={12} md={6}>
                 <Grid container direction="column" spacing={16}>
                   <Grid item>
                     <Button variant="raised" color="secondary">
@@ -127,7 +127,7 @@ class Profile extends Component {
                   </Grid>
                 </Grid>
               </Grid>
-              <Grid item xs={6} style={{ marginTop: 32 }}>
+              <Grid item xs={12} md={6}>
                 <Grid container>
                   <Grid item>
                     <Typography variant="display1">Todo:</Typography>
@@ -150,7 +150,7 @@ class Profile extends Component {
                   ))}
                 </List>
               </Grid>
-              <Grid item xs={6} style={{ marginTop: 32 }}>
+              <Grid item xs={12} md={6}>
                 <Grid container>
                   <Grid item>
                     <Typography variant="display1">Report:</Typography>
