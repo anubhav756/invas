@@ -30,8 +30,9 @@ class Profile extends Component {
 
     this.state = {
       todosChecked: [],
-      reportsChecked: [],
     };
+
+    this.toggleTodo = this.toggleTodo.bind(this);
   }
   componentWillMount() {
     const { getAgent } = this.props;
@@ -53,21 +54,6 @@ class Profile extends Component {
       todosChecked: newTodosChecked,
     });
   }
-  toggleReport(value) {
-    const { reportsChecked } = this.state;
-    const currentIndex = _.indexOf(reportsChecked, value);
-    const newReportsChecked = [...reportsChecked];
-
-    if (currentIndex === -1) {
-      newReportsChecked.push(value);
-    } else {
-      newReportsChecked.splice(currentIndex, 1);
-    }
-
-    this.setState({
-      reportsChecked: newReportsChecked,
-    });
-  }
   render() {
     const {
       agent: {
@@ -81,7 +67,6 @@ class Profile extends Component {
     } = this.props;
     const {
       todosChecked,
-      reportsChecked,
     } = this.state;
     const currentDate = moment().format('dddd, MMMM Do YYYY');
     const currentTime = moment().format('h:mm a');
@@ -140,7 +125,7 @@ class Profile extends Component {
                   {_.map([0, 1, 2], id => (
                     <ListItem key={id} button onClick={() => this.toggleTodo(id)}>
                       <Checkbox disableRipple checked={_.indexOf(todosChecked, id) !== -1} />
-                      <ListItemText primary="Lorem ipsum dolor sit amet 1" secondary="11:00 am - 12:00 pm" />
+                      <ListItemText style={{ textDecoration: _.indexOf(todosChecked, id) !== -1 ? 'line-through' : '' }} primary="Lorem ipsum dolor sit amet 1" secondary="11:00 am - 12:00 pm" />
                       <ListItemSecondaryAction>
                         <IconButton color="secondary">
                           <Delete />
@@ -162,8 +147,8 @@ class Profile extends Component {
                 <List style={{ marginRight: 32 }}>
                   {
                     _.map([0, 1], id => (
-                      <ListItem key={id} button onClick={() => this.toggleReport(id)}>
-                        <Checkbox disableRipple checked={_.indexOf(reportsChecked, id) !== -1} />
+                      <ListItem key={id}>
+                        <Typography variant="caption" style={{ fontSize: 20 }}>#{id}</Typography>
                         <ListItemText primary="Lorem ipsum dolor sit amet 1" />
                         <ListItemSecondaryAction>
                           <IconButton color="secondary">
