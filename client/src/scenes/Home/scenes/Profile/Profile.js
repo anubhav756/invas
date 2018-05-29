@@ -6,13 +6,10 @@ import {
   Grid,
   Typography,
   CircularProgress,
-  Card,
-  CardHeader,
-  Avatar,
-  IconButton,
+  Button,
+  LinearProgress,
 } from '@material-ui/core';
-import { red } from '@material-ui/core/colors';
-import { Cloud } from '@material-ui/icons';
+import { Storage } from '@material-ui/icons';
 
 import { getAgent as _getAgent } from '../../../../services/agent';
 
@@ -40,27 +37,44 @@ class Profile extends Component {
       <div>
         <Grid container justify="space-around" style={{ marginBottom: 8 }}>
           <Grid item>
-            <Typography variant="caption">{currentDate}</Typography>
+            <Typography>{currentDate}</Typography>
           </Grid>
           <Grid item>
-            <Typography variant="caption">{currentTime}</Typography>
+            <Typography>{currentTime}</Typography>
           </Grid>
         </Grid>
         {
           isFetching ?
             <CircularProgress /> :
-            <Card>
-              <CardHeader
-                avatar={<Avatar style={{ background: red[500] }}>A</Avatar>}
-                title={name}
-                subheader={`${designation} - ${region}`}
-                action={
-                  <IconButton>
-                    <Cloud />
-                  </IconButton>
-                }
-              />
-            </Card>
+            <Grid container>
+              <Grid item xs={6}>
+                <Grid container direction="column">
+                  <Grid item>
+                    <Typography variant="title">{name}</Typography>
+                  </Grid>
+                  <Grid item>
+                    <Typography variant="subheading">{designation}</Typography>
+                  </Grid>
+                  <Grid item>
+                    <Typography variant="caption">{region}</Typography>
+                  </Grid>
+                </Grid>
+              </Grid>
+              <Grid item xs={6}>
+                <Grid container direction="column" spacing={16}>
+                  <Grid item>
+                    <Button variant="raised" color="secondary">
+                      Database
+                      <Storage style={{ marginLeft: 8 }} />
+                    </Button>
+                  </Grid>
+                  <Grid item>
+                    Progress: 50%
+                    <LinearProgress variant="determinate" value={50} />
+                  </Grid>
+                </Grid>
+              </Grid>
+            </Grid>
         }
       </div>
     );
