@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import _ from 'lodash';
 import moment from 'moment';
 import {
   Grid,
@@ -24,10 +25,48 @@ import {
 import { getAgent as _getAgent } from '../../../../services/agent';
 
 class Profile extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      todosChecked: [],
+      reportsChecked: [],
+    };
+  }
   componentWillMount() {
     const { getAgent } = this.props;
 
     getAgent('testId');
+  }
+  toggleTodo(value) {
+    const { todosChecked } = this.state;
+    const currentIndex = _.indexOf(todosChecked, value);
+    const newTodosChecked = [...todosChecked];
+
+    if (currentIndex === -1) {
+      newTodosChecked.push(value);
+    } else {
+      newTodosChecked.splice(currentIndex, 1);
+    }
+
+    this.setState({
+      todosChecked: newTodosChecked,
+    });
+  }
+  toggleReport(value) {
+    const { reportsChecked } = this.state;
+    const currentIndex = _.indexOf(reportsChecked, value);
+    const newReportsChecked = [...reportsChecked];
+
+    if (currentIndex === -1) {
+      newReportsChecked.push(value);
+    } else {
+      newReportsChecked.splice(currentIndex, 1);
+    }
+
+    this.setState({
+      reportsChecked: newReportsChecked,
+    });
   }
   render() {
     const {
@@ -40,6 +79,10 @@ class Profile extends Component {
         },
       },
     } = this.props;
+    const {
+      todosChecked,
+      reportsChecked,
+    } = this.state;
     const currentDate = moment().format('dddd, MMMM Do YYYY');
     const currentTime = moment().format('h:mm a');
 
@@ -94,33 +137,17 @@ class Profile extends Component {
                   </Grid>
                 </Grid>
                 <List style={{ marginRight: 32 }}>
-                  <ListItem button>
-                    <Checkbox disableRipple />
-                    <ListItemText primary="Lorem ipsum dolor sit amet 1" secondary="11:00 am - 12:00 pm" />
-                    <ListItemSecondaryAction>
-                      <IconButton color="secondary">
-                        <Delete />
-                      </IconButton>
-                    </ListItemSecondaryAction>
-                  </ListItem>
-                  <ListItem button>
-                    <Checkbox disableRipple />
-                    <ListItemText primary="Lorem ipsum dolor sit amet 2" secondary="12:00 pm - 3:30 pm" />
-                    <ListItemSecondaryAction>
-                      <IconButton color="secondary">
-                        <Delete />
-                      </IconButton>
-                    </ListItemSecondaryAction>
-                  </ListItem>
-                  <ListItem button>
-                    <Checkbox disableRipple />
-                    <ListItemText primary="Lorem ipsum dolor sit amet 3" secondary="3:30 pm - 4:00 pm" />
-                    <ListItemSecondaryAction>
-                      <IconButton color="secondary">
-                        <Delete />
-                      </IconButton>
-                    </ListItemSecondaryAction>
-                  </ListItem>
+                  {_.map([0, 1, 2], id => (
+                    <ListItem key={id} button onClick={() => this.toggleTodo(id)}>
+                      <Checkbox disableRipple checked={_.indexOf(todosChecked, id) !== -1} />
+                      <ListItemText primary="Lorem ipsum dolor sit amet 1" secondary="11:00 am - 12:00 pm" />
+                      <ListItemSecondaryAction>
+                        <IconButton color="secondary">
+                          <Delete />
+                        </IconButton>
+                      </ListItemSecondaryAction>
+                    </ListItem>
+                  ))}
                 </List>
               </Grid>
               <Grid item xs={6} style={{ marginTop: 32 }}>
@@ -133,24 +160,19 @@ class Profile extends Component {
                   </Grid>
                 </Grid>
                 <List style={{ marginRight: 32 }}>
-                  <ListItem button>
-                    <Checkbox disableRipple />
-                    <ListItemText primary="Lorem ipsum dolor sit amet 1" />
-                    <ListItemSecondaryAction>
-                      <IconButton color="secondary">
-                        <Delete />
-                      </IconButton>
-                    </ListItemSecondaryAction>
-                  </ListItem>
-                  <ListItem button>
-                    <Checkbox disableRipple />
-                    <ListItemText primary="Lorem ipsum dolor sit amet 2" />
-                    <ListItemSecondaryAction>
-                      <IconButton color="secondary">
-                        <Delete />
-                      </IconButton>
-                    </ListItemSecondaryAction>
-                  </ListItem>
+                  {
+                    _.map([0, 1], id => (
+                      <ListItem key={id} button onClick={() => this.toggleReport(id)}>
+                        <Checkbox disableRipple checked={_.indexOf(reportsChecked, id) !== -1} />
+                        <ListItemText primary="Lorem ipsum dolor sit amet 1" />
+                        <ListItemSecondaryAction>
+                          <IconButton color="secondary">
+                            <Delete />
+                          </IconButton>
+                        </ListItemSecondaryAction>
+                      </ListItem>
+                    ))
+                  }
                 </List>
               </Grid>
             </Grid>
