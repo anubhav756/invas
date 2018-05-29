@@ -8,8 +8,18 @@ import {
   CircularProgress,
   Button,
   LinearProgress,
+  Checkbox,
+  List,
+  ListItem,
+  ListItemText,
+  ListItemSecondaryAction,
+  IconButton,
 } from '@material-ui/core';
-import { Storage } from '@material-ui/icons';
+import {
+  Storage,
+  Add,
+  Delete,
+} from '@material-ui/icons';
 
 import { getAgent as _getAgent } from '../../../../services/agent';
 
@@ -37,10 +47,10 @@ class Profile extends Component {
       <div>
         <Grid container justify="space-around" style={{ marginBottom: 8 }}>
           <Grid item>
-            <Typography>{currentDate}</Typography>
+            <Typography variant="caption">{currentDate}</Typography>
           </Grid>
           <Grid item>
-            <Typography>{currentTime}</Typography>
+            <Typography variant="caption">{currentTime}</Typography>
           </Grid>
         </Grid>
         {
@@ -69,10 +79,79 @@ class Profile extends Component {
                     </Button>
                   </Grid>
                   <Grid item>
-                    Progress: 50%
-                    <LinearProgress variant="determinate" value={50} />
+                    <Typography variant="body2">Progress: 80%</Typography>
+                    <LinearProgress variant="determinate" value={80} />
                   </Grid>
                 </Grid>
+              </Grid>
+              <Grid item xs={6} style={{ marginTop: 32 }}>
+                <Grid container>
+                  <Grid item>
+                    <Typography variant="display1">Todo:</Typography>
+                  </Grid>
+                  <Grid item style={{ marginLeft: 8 }}>
+                    <Button variant="fab" mini color="primary"><Add /></Button>
+                  </Grid>
+                </Grid>
+                <List style={{ marginRight: 32 }}>
+                  <ListItem button>
+                    <Checkbox disableRipple />
+                    <ListItemText primary="Lorem ipsum dolor sit amet 1" secondary="11:00 am - 12:00 pm" />
+                    <ListItemSecondaryAction>
+                      <IconButton color="secondary">
+                        <Delete />
+                      </IconButton>
+                    </ListItemSecondaryAction>
+                  </ListItem>
+                  <ListItem button>
+                    <Checkbox disableRipple />
+                    <ListItemText primary="Lorem ipsum dolor sit amet 2" secondary="12:00 pm - 3:30 pm" />
+                    <ListItemSecondaryAction>
+                      <IconButton color="secondary">
+                        <Delete />
+                      </IconButton>
+                    </ListItemSecondaryAction>
+                  </ListItem>
+                  <ListItem button>
+                    <Checkbox disableRipple />
+                    <ListItemText primary="Lorem ipsum dolor sit amet 3" secondary="3:30 pm - 4:00 pm" />
+                    <ListItemSecondaryAction>
+                      <IconButton color="secondary">
+                        <Delete />
+                      </IconButton>
+                    </ListItemSecondaryAction>
+                  </ListItem>
+                </List>
+              </Grid>
+              <Grid item xs={6} style={{ marginTop: 32 }}>
+                <Grid container>
+                  <Grid item>
+                    <Typography variant="display1">Report:</Typography>
+                  </Grid>
+                  <Grid item style={{ marginLeft: 8 }}>
+                    <Button variant="fab" mini color="primary"><Add /></Button>
+                  </Grid>
+                </Grid>
+                <List style={{ marginRight: 32 }}>
+                  <ListItem button>
+                    <Checkbox disableRipple />
+                    <ListItemText primary="Lorem ipsum dolor sit amet 1" />
+                    <ListItemSecondaryAction>
+                      <IconButton color="secondary">
+                        <Delete />
+                      </IconButton>
+                    </ListItemSecondaryAction>
+                  </ListItem>
+                  <ListItem button>
+                    <Checkbox disableRipple />
+                    <ListItemText primary="Lorem ipsum dolor sit amet 2" />
+                    <ListItemSecondaryAction>
+                      <IconButton color="secondary">
+                        <Delete />
+                      </IconButton>
+                    </ListItemSecondaryAction>
+                  </ListItem>
+                </List>
               </Grid>
             </Grid>
         }
